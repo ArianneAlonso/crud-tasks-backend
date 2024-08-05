@@ -1,0 +1,27 @@
+CONSIGNA:
+
+Base de Datos:
+● Crear una base de datos MySQL llamada tasks_db.
+● Crear una tabla llamada tasks con las siguientes columnas:
+○ id (INT, AUTO_INCREMENT, PRIMARY KEY)
+○ title (VARCHAR(255))
+○ description (TEXT)
+○ isComplete (BOOLEAN)
+
+API:
+● Utilizar Node.js y Express para construir el servidor backend.
+● Utilizar el driver nativo mysql2 para interactuar con la base de datos MySQL.
+● Crear rutas RESTful para las operaciones CRUD:
+○ POST /tasks: Añadir una nueva tarea.
+○ GET /tasks: Obtener todas las tareas.
+○ GET /task/:id: Obtener una tarea específica por su ID.
+○ PUT /task/:id: Actualizar una tarea específica por su ID.
+○ DELETE /task/:id: Eliminar una tarea específica por su ID.
+
+Validación de Datos:
+● Validar los datos recibidos antes de añadir una nueva tarea sin usar librerías externas:
+○ title: Debe ser una cadena no vacía y de un máximo de 255 caracteres.
+○ description: Debe ser una cadena no vacía.
+○ isComplete: Debe ser un valor booleano.
+● Mostrar mensajes de éxito o error al realizar operaciones CRUD.
+● Manejar correctamente los códigos de estado HTTP (200, 201, 400, 404, 500).
