@@ -12,4 +12,4 @@ const newConnection = async () => {
 
 module.exports = {
     newConnection
-}
+};
