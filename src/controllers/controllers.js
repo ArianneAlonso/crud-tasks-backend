@@ -1,6 +1,5 @@
-const { newConnection } = require("../bd/basedata");
+const { newConnection } = require("../bd/basedata.js");
 
-// Función para validar los datos de la tarea
 const validateTask = (title, description, isComplete) => {
     if (typeof title !== 'string' || title.trim() === '' || title.length > 255) {
         return { isValid: false, message: "no puede estar vacio y no debe de pasar los 255 caracteres." };
@@ -14,7 +13,6 @@ const validateTask = (title, description, isComplete) => {
     return { isValid: true };
 };
 
-// Mostrar todas las tareas
 const getAllTasks = async (request, response) => {
     try {
         const connection = await newConnection();
@@ -26,11 +24,9 @@ const getAllTasks = async (request, response) => {
     }
 };
 
-// Crear una nueva tarea
 const createTask = async (request, response) => {
     const { title, description, isComplete } = request.body;
     
-    // Validar los datos de la tarea
     const validacion = validateTask(title, description, isComplete);
     if (!validacion.isValid) {
         return response.status(400).json({ error: validacion.message });
@@ -46,7 +42,6 @@ const createTask = async (request, response) => {
     }
 };
 
-// Mostrar una tarea por id
 const getTaskById = async (request, response) => {
     const id = request.params.id;
 
@@ -65,12 +60,10 @@ const getTaskById = async (request, response) => {
     }
 };
 
-// Actualizar una tarea por id
 const updateTask = async (request, response) => {
     const id = request.params.id;
     const { title, description, isComplete } = request.body;
 
-    // Validar los datos de la tarea
     const validacion = validateTask(title, description, isComplete);
     if (!validacion.isValid) {
         return response.status(400).json({ error: validacion.message });
@@ -87,7 +80,6 @@ const updateTask = async (request, response) => {
     }
 };
 
-// Eliminar una tarea por id
 const deleteTask = async (request, response) => {
     const id = request.params.id;
 

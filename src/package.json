@@ -1,19 +1,18 @@
 {
-  "dependencies": {
-    "corss": "^2.8.5",
-    "express": "^4.19.2",
-    "morgan": "^1.10.0",
-    "mysql2": "^3.11.0"
-  },
-  "name": "crud-tasks-backend",
+  "name": "src",
   "version": "1.0.0",
-  "main": "index.js",
-  "devDependencies": {},
+  "main": "app.js",
   "scripts": {
-    "dev": "nodemon src/app.js"
+     "dev": "node --watch app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.11.0"
+  }
 }

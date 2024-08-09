@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const taskRouter = require('./routers/routers');
+const taskRouter = require('./routers/routers.js');
 
 const app = express();
 
@@ -30,4 +30,3 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app
