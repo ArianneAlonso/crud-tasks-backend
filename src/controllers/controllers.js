@@ -1,11 +1,11 @@
-const { newConnection } = require("../bd/basedata.js");
+import { newConnection } from "../bd/basedata.js";
 
 const validateTask = (title, description, isComplete) => {
     if (typeof title !== 'string' || title.trim() === '' || title.length > 255) {
-        return { isValid: false, message: "no puede estar vacio y no debe de pasar los 255 caracteres." };
+        return { isValid: false, message: "no puede estar vacío y no debe pasar los 255 caracteres." };
     }
     if (typeof description !== 'string' || description.trim() === '') {
-        return { isValid: false, message: "debe ser una cadena no vacia." };
+        return { isValid: false, message: "debe ser una cadena no vacía." };
     }
     if (typeof isComplete !== 'boolean') {
         return { isValid: false, message: "debe ser un valor booleano." };
@@ -13,7 +13,7 @@ const validateTask = (title, description, isComplete) => {
     return { isValid: true };
 };
 
-const getAllTasks = async (request, response) => {
+export const getAllTasks = async (request, response) => {
     try {
         const connection = await newConnection();
         const [results] = await connection.query("SELECT * FROM tasks");
@@ -24,7 +24,7 @@ const getAllTasks = async (request, response) => {
     }
 };
 
-const createTask = async (request, response) => {
+export const createTask = async (request, response) => {
     const { title, description, isComplete } = request.body;
     
     const validacion = validateTask(title, description, isComplete);
@@ -42,7 +42,7 @@ const createTask = async (request, response) => {
     }
 };
 
-const getTaskById = async (request, response) => {
+export const getTaskById = async (request, response) => {
     const id = request.params.id;
 
     try {
@@ -60,7 +60,7 @@ const getTaskById = async (request, response) => {
     }
 };
 
-const updateTask = async (request, response) => {
+export const updateTask = async (request, response) => {
     const id = request.params.id;
     const { title, description, isComplete } = request.body;
 
@@ -80,7 +80,7 @@ const updateTask = async (request, response) => {
     }
 };
 
-const deleteTask = async (request, response) => {
+export const deleteTask = async (request, response) => {
     const id = request.params.id;
 
     try {
@@ -92,12 +92,4 @@ const deleteTask = async (request, response) => {
     } catch (error) {
         response.status(500).json({ error: "error al eliminar la tarea." });
     }
-};
-
-module.exports = {
-    getAllTasks,
-    createTask,
-    getTaskById,
-    updateTask,
-    deleteTask
 };
