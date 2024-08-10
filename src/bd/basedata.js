@@ -1,4 +1,4 @@
-import {newConnection} from "mysql2"
+import { createConnection } from "mysql2/promise";
 
 export const newConnection = async () => {
     const connection = await createConnection({
@@ -8,4 +8,4 @@ export const newConnection = async () => {
     });
 
     return connection;
-}
+};

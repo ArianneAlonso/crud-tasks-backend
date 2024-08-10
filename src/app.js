@@ -1,7 +1,7 @@
-const express = require('express');
-const morgan = require('morgan');
-const cors = require('cors');
-const taskRouter = require('./routers/routers.js');
+import express from 'express';
+import morgan from 'morgan';
+import cors from 'cors';
+import taskRouter from './routers/routers.js';
 
 const app = express();
 
@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 
 // middleware manejo rutas no encontradas (404)
 app.use((req, res, next) => {
-    res.status(404).json({ error: 'ruta no enncontrsda' });
+    res.status(404).json({ error: 'ruta no encontrada' });
 });
 
 // middleware manejo de errores
@@ -30,3 +30,6 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
+});
