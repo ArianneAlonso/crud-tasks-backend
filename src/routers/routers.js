@@ -7,29 +7,17 @@ import {
     deleteTask
 } from '../controllers/controllers.js';
 import { createTaskValidation, updateTaskValidation } from '../validations/validations.js';
-import { validationResult } from 'express-validator';
+import { applyValidations } from '../middleware/applyValidations.js';
 
 const router = express.Router();
 
 router.get('/tasks', getAllTasks);
 
-router.post('/tasks', createTaskValidation, (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-    next();
-}, createTask);
+router.post('/tasks', createTaskValidation, applyValidations, createTask);
 
 router.get('/tasks/:id', getTaskById);
 
-router.put('/tasks/:id', updateTaskValidation, (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-    next();
-}, updateTask);
+router.put('/tasks/:id', updateTaskValidation, applyValidations, updateTask);
 
 router.delete('/tasks/:id', deleteTask);
 
