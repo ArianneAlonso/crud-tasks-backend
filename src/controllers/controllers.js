@@ -1,17 +1,5 @@
 import { newConnection } from "../bd/basedata.js";
-
-const validateTask = (title, description, isComplete) => {
-    if (typeof title !== 'string' || title.trim() === '' || title.length > 255) {
-        return { isValid: false, message: "no puede estar vacío y no debe pasar los 255 caracteres." };
-    }
-    if (typeof description !== 'string' || description.trim() === '') {
-        return { isValid: false, message: "debe ser una cadena no vacía." };
-    }
-    if (typeof isComplete !== 'boolean') {
-        return { isValid: false, message: "debe ser un valor booleano." };
-    }
-    return { isValid: true };
-};
+import { validationResult } from "express-validator";
 
 export const getAllTasks = async (request, response) => {
     try {
@@ -25,12 +13,12 @@ export const getAllTasks = async (request, response) => {
 };
 
 export const createTask = async (request, response) => {
-    const { title, description, isComplete } = request.body;
-    
-    const validacion = validateTask(title, description, isComplete);
-    if (!validacion.isValid) {
-        return response.status(400).json({ error: validacion.message });
+    const errors = validationResult(request);
+    if (!errors.isEmpty()) {
+        return response.status(400).json({ errors: errors.array() });
     }
+
+    const { title, description, isComplete } = request.body;
 
     try {
         const connection = await newConnection();
@@ -61,13 +49,13 @@ export const getTaskById = async (request, response) => {
 };
 
 export const updateTask = async (request, response) => {
+    const errors = validationResult(request);
+    if (!errors.isEmpty()) {
+        return response.status(400).json({ errors: errors.array() });
+    }
+
     const id = request.params.id;
     const { title, description, isComplete } = request.body;
-
-    const validacion = validateTask(title, description, isComplete);
-    if (!validacion.isValid) {
-        return response.status(400).json({ error: validacion.message });
-    }
 
     try {
         const connection = await newConnection();
