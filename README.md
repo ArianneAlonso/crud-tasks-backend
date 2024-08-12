@@ -18,5 +18,6 @@ en package.json agregar
 
   "type": "module",
 
-  y dentro de "scripts" agregar:
-   "dev": "node --watch app.js"
+  y dentro de "scripts" agregar: 
+  "dev": "node --watch app.js",
+  "start": "node app.js"
