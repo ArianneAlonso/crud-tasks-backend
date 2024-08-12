@@ -7,7 +7,7 @@ import {
     deleteTask
 } from '../controllers/controllers.js';
 import { createTaskValidation, updateTaskValidation } from '../validations/validations.js';
-import { applyValidations } from '../middleware/applyValidations.js';
+import { applyValidations } from '../middlewares/applyValidations.js';
 
 const router = express.Router();
 
